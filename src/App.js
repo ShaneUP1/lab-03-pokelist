@@ -1,15 +1,15 @@
 import React from 'react'
 import './App.css';
-import PokeItem from './PokeItem.js';
+import PokeList from './PokeList.js';
 
 export default class App extends React.Component {
   render() {
     return (
       <div className="App" >
-        <header className="App-header">
 
-        </header>
-        <PokeItem />
+        <div className="poke-list">
+          <PokeList />
+        </div>
       </div>
     );
   }
