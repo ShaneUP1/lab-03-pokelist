@@ -1,39 +1,63 @@
 body {
   background-color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: space-between;
+
+}
+form {
+  margin-bottom: 15px;
+  text-align: center;
 }
 
-h1 {
+Header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 255, 0);
+  margin-bottom: 20px;
+  height: 100px;
+}
+
+
+h2 {
   margin: 5px;
-}
-
-img {
-  height: 200px;
 }
 
 p {
   margin: 5px;
 }
 
-.poke-list {
+.search-form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
 }
+
 .poke-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 400px;
-  width: 200px;
+  text-align: center;
   border: 1px black solid;
   margin: 5px;
-  border-radius: 5px;
   background-color: yellow;
+  border-radius: 10px;
+  width: 200px;
+  height: 400px;
+  flex-wrap: wrap;
+
 }
 
-
-
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 900px;
+}
