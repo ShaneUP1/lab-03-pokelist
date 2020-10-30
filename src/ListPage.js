@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import request from 'superagent';
-import Header from './Header.js';
+import SpinnerPage from './SpinnerPage.js'
 
 export default class ListPage extends Component {
 
@@ -10,7 +10,9 @@ export default class ListPage extends Component {
         attackFiltered: '',
         defenseFiltered: '',
         orderFiltered: '',
-        pokeArray: []
+        pokeArray: [],
+        orderList: '',
+        sortList: ''
     }
 
     componentDidMount = async () => {
@@ -23,7 +25,7 @@ export default class ListPage extends Component {
     }
 
     fetchPokemon = async () => {
-        const data = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.state.namedPoke}`)
+        const data = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.state.namedPoke}&direction=${this.state.orderList}&sort=${this.state.sortList}&perPage=200`)
         this.setState({ pokeArray: data.body.results })
     }
 
@@ -33,20 +35,18 @@ export default class ListPage extends Component {
         })
     }
 
-
-
-
-
-    handleAttackFilter = (e) => {
-        this.setState({
-            attackFiltered: e.target.value
+    handleOrder = async (e) => {
+        await this.setState({
+            orderList: e.target.value
         })
+        await this.fetchPokemon();
     }
 
-    handledefenseFilter = (e) => {
-        this.setState({
-            defenseFiltered: e.target.value
+    handleSort = async (e) => {
+        await this.setState({
+            sortList: e.target.value
         })
+        await this.fetchPokemon();
     }
 
 
@@ -54,16 +54,28 @@ export default class ListPage extends Component {
         return (
             <>
                 <div className="search-form">
-                    <form onSubmit={this.handleForm}>
-                        Looking for someone specific?
-                <input type='text' onChange={this.handleSearchChange} />
-                        <button>Search by Character Name</button>
+                    <form onSubmit={this.handleForm}> Looking for someone specific?
+                        <input type='text' onChange={this.handleSearchChange} />
+                        <button>Search by Name</button>
                     </form>
+                    <div className='dropdowns'>
+                        <select onChange={this.handleOrder}>
+                            <option value=''>Any Order</option>
+                            <option value='asc'>Ascending</option>
+                            <option value='desc'>Descending</option>
+                        </select>
+                    </div>
+                    <select onChange={this.handleSort}>
+                        <option value=''>Sort By</option>
+                        <option value='attack'>Attack</option>
+                        <option value='defense'>Defense</option>
+                    </select>
                     <div className="main">
                         {
                             this.state.pokeArray.length === 0
-                                ? 'Be Patient, Still Loading'
+                                ? <iframe title="my pokemon spinner" src="https://giphy.com/embed/slVWEctHZKvWU" width="480" height="361" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
                                 : this.state.pokeArray.map(poke =>
+
                                     <div className='poke-card'>
                                         <h2>{poke.pokemon}</h2>
                                         <img src={poke.url_image} alt="" width="120" height="200" />
