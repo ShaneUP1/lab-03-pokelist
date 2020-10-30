@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import request from 'superagent';
+import Header from './Header.js';
 
 export default class ListPage extends Component {
 
@@ -49,33 +50,32 @@ export default class ListPage extends Component {
     }
 
 
-
-
-
-
-
     render() {
         return (
-            <div>
-                <form onSubmit={this.handleForm}>
-                    Looking for someone specific?
+            <>
+                <div className="search-form">
+                    <form onSubmit={this.handleForm}>
+                        Looking for someone specific?
                 <input type='text' onChange={this.handleSearchChange} />
-                    <button>Search by Character Name</button>
-                </form>
-                {
-                    this.state.pokeArray.length === 0
-                        ? 'Be Patient, Still Loading'
-                        : this.state.pokeArray.map(poke =>
-                            <div>
-                                <h2>{poke.pokemon}</h2>)
-                                <img src={poke.url_image} alt="" width="100" height="200" />
-                                <p>attack: {poke.attack}</p>
-                                <p>defense: {poke.defense}</p>
-                                <p>ability: {poke.ability_1}</p>
-                            </div>
-                        )
-                }
-            </div>
+                        <button>Search by Character Name</button>
+                    </form>
+                    <div className="main">
+                        {
+                            this.state.pokeArray.length === 0
+                                ? 'Be Patient, Still Loading'
+                                : this.state.pokeArray.map(poke =>
+                                    <div className='poke-card'>
+                                        <h2>{poke.pokemon}</h2>
+                                        <img src={poke.url_image} alt="" width="120" height="200" />
+                                        <p>attack: {poke.attack}</p>
+                                        <p>defense: {poke.defense}</p>
+                                        <p>ability: {poke.ability_1}</p>
+                                    </div>
+                                )
+                        }
+                    </div>
+                </div>
+            </>
 
         )
     }
