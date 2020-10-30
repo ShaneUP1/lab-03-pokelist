@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import request from 'superagent';
-import SpinnerPage from './SpinnerPage.js'
 
 export default class ListPage extends Component {
 
