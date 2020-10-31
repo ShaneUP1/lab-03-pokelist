@@ -8,6 +8,7 @@ import {
 import ListPage from './ListPage.js'
 import HomePage from './HomePage.js'
 import Header from './Header.js'
+import DetailPage from './DetailPage.js'
 
 export default class App extends React.Component {
 
@@ -27,6 +28,11 @@ export default class App extends React.Component {
                 path="/list"
                 exact
                 render={(routerProps) => <ListPage {...routerProps} />}
+              />
+              <Route
+                path="/list/detail/:pokemon"
+                exact
+                render={(routerProps) => <DetailPage {...routerProps} />}
               />
             </Switch>
           </Router>
