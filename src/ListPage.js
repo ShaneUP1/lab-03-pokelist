@@ -58,7 +58,7 @@ export default class ListPage extends Component {
         return (
             <>
                 <div className="search-form">
-                    <form onSubmit={this.handleForm}> Looking for someone specific?
+                    <form onSubmit={this.handleForm}>
                         <input type='text' onChange={this.handleSearchChange} />
                         <button>Search by Name</button>
                     </form>

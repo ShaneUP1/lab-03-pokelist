@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import request from 'superagent';
-import pokemon from './pokemon';
 
 export default class DetailPage extends Component {
     state = {
@@ -21,7 +20,7 @@ export default class DetailPage extends Component {
                 {
                     this.state.pokemon.length === 0
                         ? 'loading!!!'
-                        : this.state.pokemon.map(poke => <div key={poke.pokemon}>
+                        : this.state.pokemon.map(poke => <div className="detail-card" key={poke.pokemon}>
                             <img src={poke.url_image} alt="" width="120" height="200" />
                             <h2>{poke.pokemon}</h2>
                             <p>attack: {poke.attack}</p>
