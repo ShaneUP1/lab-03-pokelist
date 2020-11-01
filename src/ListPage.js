@@ -11,7 +11,8 @@ export default class ListPage extends Component {
         orderFiltered: '',
         pokeArray: [],
         orderList: '',
-        sortList: ''
+        sortList: '',
+        pageNumber: 1
     }
 
     componentDidMount = async () => {
@@ -24,8 +25,11 @@ export default class ListPage extends Component {
     }
 
     fetchPokemon = async () => {
-        const data = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.state.namedPoke}&direction=${this.state.orderList}&sort=${this.state.sortList}&perPage=20`)
-        this.setState({ pokeArray: data.body.results })
+        const data = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.state.namedPoke}&direction=${this.state.orderList}&sort=${this.state.sortList}&page=${this.state.pageNumber}&perPage=20`)
+        this.setState({
+            pokeArray: data.body.results,
+            count: data.body.count
+        })
     }
 
     handleSearchChange = (e) => {
@@ -52,6 +56,20 @@ export default class ListPage extends Component {
         this.props.history.push(`/detail/${poke.pokemon}`);
     }
 
+    handleNext = async () => {
+        await this.setState({
+            pageNumber: this.state.pageNumber + 1,
+        })
+        await this.fetchPokemon();
+    }
+
+    handlePrev = async () => {
+        await this.setState({
+            pageNumber: this.state.pageNumber - 1,
+        })
+        await this.fetchPokemon();
+    }
+
 
     render() {
 
@@ -75,6 +93,26 @@ export default class ListPage extends Component {
                     <option value='attack'>Attack</option>
                     <option value='defense'>Defense</option>
                 </select>
+                <div className="page-buttons">
+                    {
+                        <button
+                            disabled={this.state.pageNumber === 1}
+                            onClick={this.handlePrev}>
+                            Prev
+                </button>
+                    }
+                    {
+                        <button
+                            onClick={this.handleNext}
+                            disabled={this.state.pageNumber === Math.ceil(this.state.count / 20)}>
+                            Next
+                </button>
+                    }
+                </div>
+                <div>
+                    Page {this.state.pageNumber} out of {Math.ceil(this.state.count / 20)}
+                </div>
+
                 <div className="main">
                     {this.state.pokeArray.length === 0
                         ? <iframe title="my pokemon spinner" src="https://giphy.com/embed/slVWEctHZKvWU" width="480" height="361" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
