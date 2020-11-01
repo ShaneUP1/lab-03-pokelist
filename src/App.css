@@ -11,16 +11,10 @@ form {
   text-align: center;
 }
 
-Header {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(255, 255, 0);
-  margin-bottom: 20px;
-  height: 100px;
+h1 {
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
-
 
 h2 {
   margin: 5px;
@@ -30,7 +24,47 @@ p {
   margin: 5px;
 }
 
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: yellow;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid rgb(44, 117, 44);
+  box-shadow: 0px 5px 8px rgb(44, 117, 44);
+}
+
 .search-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.header-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0px;
+  margin: auto;
+  font-size: 30px;
+}
+
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: ;
+  align-items: flex-end;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.poke-list {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -60,4 +94,20 @@ p {
   align-items: center;
   flex-wrap: wrap;
   width: 900px;
+}
+
+.detail-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px black solid;
+  margin: 5px;
+  background-color: yellow;
+  border-radius: 10px;
+  width: 200px;
+  height: 400px;
+  flex-wrap: wrap;
+ 
 }
