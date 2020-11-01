@@ -59,7 +59,6 @@ p {
 .nav-links {
   display: flex;
   flex-direction: column;
-  justify-content: ;
   align-items: flex-end;
   text-align: right;
   margin-right: 10px;
